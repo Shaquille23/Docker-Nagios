@@ -148,6 +148,7 @@ RUN	export DOC_ROOT="DocumentRoot $(echo $NAGIOS_HOME/share)"					&&	\
 	sed -i "s,DocumentRoot.*,$DOC_ROOT," /etc/apache2/sites-enabled/000-default.conf		&&	\
 	sed -i "s,</VirtualHost>,<IfDefine ENABLE_USR_LIB_CGI_BIN>\nScriptAlias /cgi-bin/ /opt/nagios/sbin/\n</IfDefine>\n</VirtualHost>," /etc/apache2/sites-enabled/000-default.conf	&&	\
 	ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/cgi.load
+RUN 	sed -i '$aServerName localhost' /etc/apache2/apache2.conf
 
 RUN	mkdir -p /usr/share/snmp/mibs								&&	\
 	mkdir -p ${NAGIOS_HOME}/etc/conf.d							&&	\
